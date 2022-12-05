@@ -1,0 +1,22 @@
+.gb-container{
+  display: flex;
+  flex-direction: column;
+  background-color: #c0c0c0;
+
+}
+.header{
+  width: 100%;
+  position:fixed;
+  height: 50px;
+  top: 60px;
+  background-color: #c0c0c0;
+  z-index: 100;
+}
+
+.content{
+  position: relative;
+  height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -2,14 +2,34 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
+import { Provider } from "react-redux";
+import store from "./store/store";
 import reportWebVitals from './reportWebVitals';
+import { createTheme } from "@material-ui/core/styles";
+import { ThemeProvider } from "@mui/material";
+
+
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+const theme = createTheme({
+    palette: {
+        primary: {
+            main: "rgba(53, 154, 248, 0.62)"
+        },
+        secondary: {
+            main: "rgba(63, 186, 5, 0.47)"
+        }
+    }
+});
 root.render(
   <React.StrictMode>
-    <App />
+      <Provider store={store}>
+          <ThemeProvider theme={theme}>
+              <App />
+          </ThemeProvider>
+      </Provider>
   </React.StrictMode>
 );
 
