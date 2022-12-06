@@ -7,9 +7,11 @@
     justify-content: center;
     align-items: center;
     color: white;
+    max-width: 140px;
 
 }
 .basic{
+    max-width: 140px;
     width: 100%;
     background-color: #FDF1F1;
     flex-direction: column;

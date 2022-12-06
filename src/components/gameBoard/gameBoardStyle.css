@@ -1,7 +1,10 @@
 .gb-container{
   display: flex;
   flex-direction: column;
-  background-color: #c0c0c0;
+  background-image: url("../../assets/football-stadium.jpeg");
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; /* Resize the background image to cover the entire container */
 
 }
 .header{
@@ -19,4 +22,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.blur-background{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+width: 350px;
+  height: 100px;
+  background-color: black;
+  color: white;
+  opacity: 0.5;
 }

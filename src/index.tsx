@@ -20,7 +20,11 @@ const theme = createTheme({
         },
         secondary: {
             main: "rgba(63, 186, 5, 0.47)"
+        },
+        info:{
+            main: '#9D9D9DFF'
         }
+
     }
 });
 root.render(
