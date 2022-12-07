@@ -7,6 +7,8 @@ import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import './betSlipStyles.css'
 import {Button, Chip, Drawer, Stack, Typography} from "@mui/material";
 import {useSelector} from "react-redux";
+import SingleBox from "./SingleBox";
+import {IBet} from "../../utils/models";
 
 const BetSlip = () => {
     const [open, setOpen] = useState(false)
@@ -96,6 +98,10 @@ const BetSlip = () => {
                        <h3>{allBets.length < 2 ? 'Add another selection' : '232'}</h3>
                    </Stack>
                     </BleedingBox>
+                {allBets.length && allBets.map((bet:IBet)=>
+                    <SingleBox key={bet.bet} bet={bet}/>
+                )}
+
                 {allBets.length < 2 &&
                     <Stack spacing={2} alignItems={'center'}>
                     <Typography color={'red'}>
@@ -108,7 +114,8 @@ const BetSlip = () => {
                         >
                             ADD PICK
                         </Button>
-                </Stack>}
+                </Stack>
+                }
                 <InfoBox>
                     <Typography fontSize={20} fontWeight={'bold'} p={0}>Enter wager amount</Typography>
                     <Typography p={0}>minimum wager is 1.00$</Typography>
