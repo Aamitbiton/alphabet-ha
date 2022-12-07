@@ -1,14 +1,20 @@
-.single-box-container{
-    border-bottom: black solid 1px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 8px;
+.single-box-container {
+  border-bottom: black solid 1px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 8px;
+
+
 }
-.single-box-data{
-    text-align: center;
+.single-box-data {
+  text-align: center;
 }
 .MuiOutlinedInput-notchedOutline {
-    border-color: black !important;
-    border-width: 2px !important;
+  border-color: black !important;
+  border-width: 2px !important;
+  color: black;
+}
+.Mui-focused {
+  color: #23a5eb;
 }

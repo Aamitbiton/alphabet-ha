@@ -14,21 +14,20 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 const theme = createTheme({
-    palette: {
-        primary: {
-            main: "rgba(53, 154, 248, 0.62)"
-        },
-        secondary: {
-            main: "rgba(63, 186, 5, 0.47)"
-        },
-        info:{
-            main: '#9D9D9DFF'
-        },
-        warning:{
-            main: '#ffffff'
-        }
-
-    }
+  palette: {
+    primary: {
+      main: "rgba(53, 154, 248, 0.62)",
+    },
+    secondary: {
+      main: "rgba(63, 186, 5, 0.47)",
+    },
+    info: {
+      main: "#9D9D9DFF",
+    },
+    warning: {
+      main: "#ffffff",
+    },
+  },
 });
 root.render(
   <React.StrictMode>
