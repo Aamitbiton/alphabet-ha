@@ -1,0 +1,16 @@
+.bet-slip-sticky{
+    position: fixed;
+    bottom: 0;
+    height: 55px;
+    width: 100%;
+    background-color: silver;
+    color: white;
+    z-index: 100;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border: 1px solid black;
+}
+
+.drawer{
+    min-height: 70% !important;
+}
