@@ -5,21 +5,20 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import './betSlipStyles.css'
-import {Chip, Drawer, Stack} from "@mui/material";
+import {Button, Chip, Drawer, Stack, Typography} from "@mui/material";
 import {useSelector} from "react-redux";
 
 const BetSlip = () => {
     const [open, setOpen] = useState(false)
     const allBets = useSelector((state: any) => state.app).bets;
 
-    const drawerBleeding = 55;
+    const drawerBleeding = 65;
 
-    const Root = styled('div')(() => ({
+    const Root = styled('div')({
         height: '100%',
         backgroundColor: 'silver',
-    }));
-
-    const StyledBox = styled(Box)(() => ({
+    });
+    const BleedingBox = styled(Box)({
         backgroundColor: 'silver',
         height: '65px',
         position: 'absolute',
@@ -35,9 +34,22 @@ const BetSlip = () => {
         alignItems: 'center',
         padding: 8,
         justifyContent: 'space-between'
-    }));
+    });
+    const InfoBox = styled(Box)({
+        backgroundColor: 'silver',
+         height: 65,
+        width: '80%',
+        position: 'absolute',
+        bottom: 5,
+        left: '10%',
+        maxWidth: 400,
+        color: 'white',
+        display: 'flex',
+        alignItems: 'center',
+        flexDirection:'column'
 
-    const Puller = styled(Box)(() => ({
+    });
+    const Puller = styled(Box)({
         width: 30,
         height: 6,
         backgroundColor: 'white',
@@ -45,7 +57,7 @@ const BetSlip = () => {
         position: 'absolute',
         top: 8,
         left: 'calc(50% - 15px)',
-    }));
+    });
 
     const toggleDrawer = () => () => {
             setOpen(!open);
@@ -58,7 +70,7 @@ const BetSlip = () => {
             <Global
                 styles={{
                     '.MuiDrawer-root > .MuiPaper-root': {
-                        height: `calc(50% - ${drawerBleeding}px)`,
+                        height: `calc(70% - ${drawerBleeding}px)`,
                         overflow: 'visible',
                     },
                 }}
@@ -73,18 +85,34 @@ const BetSlip = () => {
                 }}
             >
 
-                <StyledBox onClick={toggleDrawer()}>
+                <BleedingBox onClick={toggleDrawer()}>
                         <Puller/>
-                    <Stack direction={'row'} sx={{alignItems:'center'}}>
+                    <Stack spacing={1} direction={'row'} sx={{alignItems:'center'}}>
                         <Chip color={'warning'} label={allBets.length}/>
                         <h3>BetSlip</h3>
                     </Stack>
-                    <Stack direction={'row'} sx={{alignItems:'center'}}>
+                    <Stack spacing={1} direction={'row'} sx={{alignItems:'center'}}>
                        <Chip color={'warning'} label={'BB'}/>
                        <h3>{allBets.length < 2 ? 'Add another selection' : '232'}</h3>
                    </Stack>
-                    </StyledBox>
-
+                    </BleedingBox>
+                {allBets.length < 2 &&
+                    <Stack spacing={2} alignItems={'center'}>
+                    <Typography color={'red'}>
+                        Add 1 more pick to build a valid BET BUILDER
+                    </Typography>
+                        <Button
+                            variant={'contained'}
+                            color={'info'}
+                            onClick={()=>setOpen(false)}
+                        >
+                            ADD PICK
+                        </Button>
+                </Stack>}
+                <InfoBox>
+                    <Typography fontSize={20} fontWeight={'bold'} p={0}>Enter wager amount</Typography>
+                    <Typography p={0}>minimum wager is 1.00$</Typography>
+                </InfoBox>
 
             </Drawer>
         </Root>
