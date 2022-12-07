@@ -5,13 +5,13 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import './betSlipStyles.css'
-import {Drawer} from "@mui/material";
+import {Chip, Drawer, Stack} from "@mui/material";
+import {useSelector} from "react-redux";
 
 const BetSlip = () => {
     const [open, setOpen] = useState(false)
-useEffect(()=>{
-    console.log('open state:', open)
-},[open])
+    const allBets = useSelector((state: any) => state.app).bets;
+
     const drawerBleeding = 55;
 
     const Root = styled('div')(() => ({
@@ -21,15 +21,20 @@ useEffect(()=>{
 
     const StyledBox = styled(Box)(() => ({
         backgroundColor: 'silver',
-        height: '55px',
+        height: '65px',
         position: 'absolute',
         top: -drawerBleeding,
         cursor: 'pointer',
         borderTopLeftRadius: 8,
         borderTopRightRadius: 8,
-        visibility: 'visible',
+        visibility: allBets.length ? 'visible' : 'hidden',
         right: 0,
         left: 0,
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        padding: 8,
+        justifyContent: 'space-between'
     }));
 
     const Puller = styled(Box)(() => ({
@@ -70,6 +75,14 @@ useEffect(()=>{
 
                 <StyledBox onClick={toggleDrawer()}>
                         <Puller/>
+                    <Stack direction={'row'} sx={{alignItems:'center'}}>
+                        <Chip color={'warning'} label={allBets.length}/>
+                        <h3>BetSlip</h3>
+                    </Stack>
+                    <Stack direction={'row'} sx={{alignItems:'center'}}>
+                       <Chip color={'warning'} label={'BB'}/>
+                       <h3>{allBets.length < 2 ? 'Add another selection' : '232'}</h3>
+                   </Stack>
                     </StyledBox>
 
 

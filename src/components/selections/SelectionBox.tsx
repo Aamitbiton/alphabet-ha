@@ -27,6 +27,7 @@ const SelectionBox = (selection:ISelection) => {
         }
         else if(typeAlreadySelected(newBet.type)){
             const index = allBets.findIndex((b:IBet)=>b.bet === typeAlreadySelected(newBet.type).bet);
+            newBet.id = allBets[index].id
             updateBetToStore({index, bet:newBet})
             setSelectedIndex(i)
         }
