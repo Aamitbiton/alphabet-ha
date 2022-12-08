@@ -48,27 +48,24 @@ const BetSlip = () => {
     backgroundColor: "silver",
     height: 65,
     width: "80%",
-    position: "absolute",
-    bottom: 5,
-    left: "10%",
     maxWidth: 400,
     color: "white",
     display: "flex",
     alignItems: "center",
     flexDirection: "column",
+      margin:8
+
   });
   const SubmitBox = styled(Box)({
     height: 65,
     width: "80%",
-    position: "absolute",
-    bottom: 5,
-    left: "10%",
     maxWidth: 400,
     color: "white",
     display: "flex",
     alignItems: "center",
     flexDirection: "column",
-    justifyItems: "center"
+    justifyItems: "center",
+    margin:8
   });
   const Puller = styled(Box)({
     width: 30,
@@ -124,39 +121,41 @@ const BetSlip = () => {
             <h3>{allBets.length < 2 ? "Add another selection" : "232"}</h3>
           </Stack>
         </BleedingBox>
-        {allBets.length >= 2 && <BetBuilderBox/>}
-        {allBets.length &&
-          allBets.map((bet: IBet) => <SingleBox key={bet.bet} bet={bet} />
+        <div className={'scroll'}>
+          {allBets.length >= 2 && <BetBuilderBox/>}
+          {allBets.length &&
+              allBets.map((bet: IBet) => <SingleBox key={bet.bet} bet={bet} />
+              )}
+
+          {allBets.length === 1 && (
+              <Stack spacing={2} alignItems={"center"}>
+                <Typography color={"red"}>
+                  Add 1 more pick to build a valid BET BUILDER
+                </Typography>
+                <Button
+                    variant={"contained"}
+                    color={"info"}
+                    onClick={() => setOpen(false)}
+                >
+                  ADD PICK
+                </Button>
+              </Stack>
           )}
 
-        {allBets.length === 1 && (
-          <Stack spacing={2} alignItems={"center"}>
-            <Typography color={"red"}>
-              Add 1 more pick to build a valid BET BUILDER
-            </Typography>
-            <Button
-              variant={"contained"}
-              color={"info"}
-              onClick={() => setOpen(false)}
-            >
-              ADD PICK
-            </Button>
-          </Stack>
-        )}
+          {checkIfHaveWagerToAll() ?
+              <SubmitBox>
+                <Button onClick={()=>submitBet()} sx={{width: '50%'}} variant={'contained'}>Place your bet</Button>
+              </SubmitBox>
+              :
+              <InfoBox>
+                <Typography fontSize={20} fontWeight={"bold"} p={0}>
+                  Enter wager amount
+                </Typography>
+                <Typography p={0}>minimum wager is 1.00$</Typography>
+              </InfoBox>
+          }
+        </div>
 
-        {checkIfHaveWagerToAll() ?
-            <SubmitBox>
-              <Button onClick={()=>submitBet()} sx={{width: '50%'}} variant={'contained'}>Place your bet</Button>
-            </SubmitBox>
-            :
-            <InfoBox>
-              <Typography fontSize={20} fontWeight={"bold"} p={0}>
-                Enter wager amount
-              </Typography>
-              <Typography p={0}>minimum wager is 1.00$</Typography>
-            </InfoBox>
-
-        }
       </Drawer>
     </Root>
   );

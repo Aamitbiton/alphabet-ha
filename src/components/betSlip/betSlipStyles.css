@@ -20,6 +20,11 @@
   border-width: 2px !important;
   color: black;
 }
+.scroll{
+  overflow-y: scroll;
+  text-align: -webkit-center;
+}
+
 .Mui-focused {
   color: #23a5eb;
 }
