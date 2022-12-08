@@ -4,8 +4,13 @@
   flex-direction: row;
   justify-content: space-between;
   padding: 8px;
-
-
+}
+.betbuilder-box-container{
+  border-bottom: darkred solid 2px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 8px;
 }
 .single-box-data {
   text-align: center;

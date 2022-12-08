@@ -9,6 +9,7 @@ import { Button, Chip, Drawer, Stack, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 import SingleBox from "./SingleBox";
 import { IBet } from "../../utils/models";
+import BetBuilderBox from "./BetBuilderBox";
 
 const BetSlip = () => {
   const [open, setOpen] = useState(false);
@@ -75,7 +76,7 @@ const BetSlip = () => {
       <Global
         styles={{
           ".MuiDrawer-root > .MuiPaper-root": {
-            height: `calc(75% - ${drawerBleeding}px)`,
+            height: `calc(85% - ${drawerBleeding}px)`,
             overflow: "visible",
           },
         }}
@@ -99,8 +100,10 @@ const BetSlip = () => {
             <h3>{allBets.length < 2 ? "Add another selection" : "232"}</h3>
           </Stack>
         </BleedingBox>
+        {allBets.length >= 2 && <BetBuilderBox/>}
         {allBets.length &&
-          allBets.map((bet: IBet) => <SingleBox key={bet.bet} bet={bet} />)}
+          allBets.map((bet: IBet) => <SingleBox key={bet.bet} bet={bet} />
+          )}
 
         {allBets.length === 1 && (
           <Stack spacing={2} alignItems={"center"}>

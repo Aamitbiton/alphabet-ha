@@ -10,12 +10,12 @@ import { ICustomTimeLine } from "../../utils/models";
 const CustomTimeLine = ({ data }: ICustomTimeLine) => {
   return (
     <div>
-      <Timeline sx={{ p: 0, whiteSpace: "nowrap" }}>
+      <Timeline sx={{ p: 0, whiteSpace: "nowrap", placeItems: 'flex-start'}}>
         {data.map((line, index) => (
-          <TimelineItem>
+          <TimelineItem key={line.title}>
             <TimelineSeparator>
               <TimelineDot />
-              {data.length > 2 && <TimelineConnector />}
+              {data[index + 1] && <TimelineConnector />}
             </TimelineSeparator>
             <TimelineContent sx={{ p: 0 }}>
               <Typography variant="h6" fontWeight={"bold"} component="span">

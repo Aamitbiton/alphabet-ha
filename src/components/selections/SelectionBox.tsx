@@ -58,6 +58,11 @@ const SelectionBox = (selection: ISelection) => {
     const payload = { index, bet };
     dispatch(updateBet(payload));
   };
+  const checkIfExist = (bet: string)=>{
+    if (!allBets.length) return false;
+    return allBets.filter((b: IBet) => b.bet === bet)[0];
+
+  }
 
   return (
     <div>
@@ -74,7 +79,7 @@ const SelectionBox = (selection: ISelection) => {
             {selection.bets.map((bet, index) => (
               <Box
                 key={bet.bet}
-                className={index === selectedIndex ? "selected" : "basic"}
+                className={checkIfExist(bet.bet) ? "selected" : "basic"}
                 onClick={() => handleSelected(index, bet)}
               >
                 <p>{bet.bet}</p>
