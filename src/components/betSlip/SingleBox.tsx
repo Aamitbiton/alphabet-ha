@@ -15,13 +15,12 @@ import "./betSlipStyles.css";
 import {removeBet} from "../../store/slice";
 import { useDispatch } from "react-redux";
 
-const SingleBox = ({bet, submit}: IBetSlipBox) => {
+const SingleBox = ({bet}: IBetSlipBox) => {
   const dispatch = useDispatch();
   const [betValue, setBetValue] = useState('0.00');
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value =event.target.value === '' ? '0.00' : parseFloat(event.target.value).toFixed(2)
     setBetValue(value);
-    if (Number(event.target.value) >= 1) submit(true)
   };
   const removeBetFromStore = (id: number) => {
     dispatch(removeBet(id));

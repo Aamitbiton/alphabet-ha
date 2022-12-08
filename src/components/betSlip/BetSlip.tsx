@@ -3,7 +3,6 @@ import { Global } from "@emotion/react";
 import { styled } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
-import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import "./betSlipStyles.css";
 import { Button, Chip, Drawer, Stack, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
@@ -14,7 +13,6 @@ import {toastify} from "../../utils/utils";
 
 const BetSlip = () => {
   const [open, setOpen] = useState(false);
-  const [submit, setSubmit] = useState(false);
   const allBets = useSelector((state: any) => state.app).bets;
   useEffect(() => {
     if (!allBets.length) setOpen(false);
@@ -57,17 +55,6 @@ const BetSlip = () => {
       margin:8
 
   });
-  const SubmitBox = styled(Box)({
-    height: 65,
-    width: "80%",
-    maxWidth: 400,
-    color: "white",
-    display: "flex",
-    alignItems: "center",
-    flexDirection: "column",
-    justifyItems: "center",
-    margin:8
-  });
   const Puller = styled(Box)({
     width: 30,
     height: 6,
@@ -81,10 +68,6 @@ const BetSlip = () => {
   const toggleDrawer = () => () => {
     setOpen(!open);
   };
-  const submitBet = ()=>{
-    setOpen(false)
-    toastify('Your bet was successful', false)
-  }
 
   return (
     <Root>
@@ -119,7 +102,7 @@ const BetSlip = () => {
         <div className={'scroll'}>
           {allBets.length >= 2 && <BetBuilderBox/>}
           {allBets.length &&
-              allBets.map((bet: IBet) => <SingleBox submit={setSubmit} key={bet.bet} bet={bet} />
+              allBets.map((bet: IBet) => <SingleBox  key={bet.bet} bet={bet} />
               )}
 
           {allBets.length === 1 && (
@@ -137,18 +120,14 @@ const BetSlip = () => {
               </Stack>
           )}
 
-          {submit ?
-              <SubmitBox>
-                <Button onClick={()=>submitBet()} sx={{width: '50%'}} variant={'contained'}>Place your bet</Button>
-              </SubmitBox>
-              :
+
               <InfoBox>
                 <Typography fontSize={20} fontWeight={"bold"} p={0}>
                   Enter wager amount
                 </Typography>
                 <Typography p={0}>minimum wager is 1.00$</Typography>
               </InfoBox>
-          }
+
         </div>
 
       </Drawer>

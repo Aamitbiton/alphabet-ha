@@ -1,4 +1,3 @@
-import {SetStateAction, Dispatch} from "react";
 
 export interface ISelection {
   title: string;
@@ -22,7 +21,6 @@ export interface IUpdateToStore {
 
 export interface IBetSlipBox {
   bet: IBet;
-  submit: Dispatch<SetStateAction<boolean>>
 }
 
 export interface ICustomTimeLine {
