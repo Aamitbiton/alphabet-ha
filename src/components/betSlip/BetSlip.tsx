@@ -9,7 +9,6 @@ import { useSelector } from "react-redux";
 import SingleBox from "./SingleBox";
 import { IBet } from "../../utils/models";
 import BetBuilderBox from "./BetBuilderBox";
-import {toastify} from "../../utils/utils";
 
 const BetSlip = () => {
   const [open, setOpen] = useState(false);
@@ -22,10 +21,9 @@ const BetSlip = () => {
   const Root = styled("div")({
     height: "100%",
     backgroundColor: "silver",
-    overflowY: 'scroll',
-    marginBottom: 70
-
-});
+    overflowY: "scroll",
+    marginBottom: 70,
+  });
   const BleedingBox = styled(Box)({
     backgroundColor: "silver",
     height: "65px",
@@ -52,8 +50,7 @@ const BetSlip = () => {
     display: "flex",
     alignItems: "center",
     flexDirection: "column",
-      margin:8
-
+    margin: 8,
   });
   const Puller = styled(Box)({
     width: 30,
@@ -99,37 +96,33 @@ const BetSlip = () => {
             <h3>{allBets.length < 2 ? "Add another selection" : "232"}</h3>
           </Stack>
         </BleedingBox>
-        <div className={'scroll'}>
-          {allBets.length >= 2 && <BetBuilderBox/>}
+        <div className={"scroll"}>
+          {allBets.length >= 2 && <BetBuilderBox />}
           {allBets.length &&
-              allBets.map((bet: IBet) => <SingleBox  key={bet.bet} bet={bet} />
-              )}
+            allBets.map((bet: IBet) => <SingleBox key={bet.bet} bet={bet} />)}
 
           {allBets.length === 1 && (
-              <Stack spacing={2} alignItems={"center"}>
-                <Typography color={"red"}>
-                  Add 1 more pick to build a valid BET BUILDER
-                </Typography>
-                <Button
-                    variant={"contained"}
-                    color={"info"}
-                    onClick={() => setOpen(false)}
-                >
-                  ADD PICK
-                </Button>
-              </Stack>
+            <Stack spacing={2} alignItems={"center"}>
+              <Typography color={"red"}>
+                Add 1 more pick to build a valid BET BUILDER
+              </Typography>
+              <Button
+                variant={"contained"}
+                color={"info"}
+                onClick={() => setOpen(false)}
+              >
+                ADD PICK
+              </Button>
+            </Stack>
           )}
 
-
-              <InfoBox>
-                <Typography fontSize={20} fontWeight={"bold"} p={0}>
-                  Enter wager amount
-                </Typography>
-                <Typography p={0}>minimum wager is 1.00$</Typography>
-              </InfoBox>
-
+          <InfoBox>
+            <Typography fontSize={20} fontWeight={"bold"} p={0}>
+              Enter wager amount
+            </Typography>
+            <Typography p={0}>minimum wager is 1.00$</Typography>
+          </InfoBox>
         </div>
-
       </Drawer>
     </Root>
   );
