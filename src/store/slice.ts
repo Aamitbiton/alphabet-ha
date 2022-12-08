@@ -24,14 +24,11 @@ const appSlice = createSlice({
     setBetBuilder:(app,action)=>{
         app.betBuilder = action.payload
     },
-    addWagerToBet:(app,action)=>{
-        const index = app.bets.findIndex((b)=>b.id === action.payload.id)
-        app.bets[index] = {...app.bets[index],wager: action.payload.wager}
-    }
+
 
   },
 });
 
-export const { addBet, removeBet, updateBet, setBetBuilder, addWagerToBet } = appSlice.actions;
+export const { addBet, removeBet, updateBet, setBetBuilder } = appSlice.actions;
 
 export default appSlice.reducer;

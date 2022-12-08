@@ -1,4 +1,4 @@
-import CustomTimeLine from "../components/betSlip/CustomTimeLine";
+import {SetStateAction, Dispatch} from "react";
 
 export interface ISelection {
   title: string;
@@ -14,7 +14,6 @@ export interface IBet {
   bet: string;
   value: number;
   id: number;
-  wager?: number
 }
 export interface IUpdateToStore {
   index: number;
@@ -23,6 +22,7 @@ export interface IUpdateToStore {
 
 export interface IBetSlipBox {
   bet: IBet;
+  submit: Dispatch<SetStateAction<boolean>>
 }
 
 export interface ICustomTimeLine {

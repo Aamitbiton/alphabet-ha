@@ -2,18 +2,40 @@ import React, { useState } from "react";
 import { Chip, Stack, Switch } from "@mui/material";
 import InfoIcon from "@mui/icons-material/Info";
 import "./subMenusStyle.css";
-import { useDispatch } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import { setBetBuilder } from "../../store/slice";
+import {IBet} from "../../utils/models";
+import {toastify} from "../../utils/utils";
 const SubMenus = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const dispatch = useDispatch();
+  const [switchChecked, setSwitchChecked] = useState(true);
+    const allBets = useSelector((state: any) => state.app).bets;
+
+    const dispatch = useDispatch();
   const handleSelected = (i: number) => {
-    console.log(i);
     setSelectedIndex(i);
   };
+
   const handleSwitchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+
+      if (!event.target.checked && checkIfHaveMultipleTypes()){
+          toastify('you cant disable because you have multiple bets', true)
+          setSwitchChecked(true)
+          return
+
+
+      }
+      setSwitchChecked(event.target.checked)
     dispatch(setBetBuilder(event.target.checked));
   };
+  const checkIfHaveMultipleTypes = ():boolean=>{
+      let data: string[] = []
+      allBets.forEach((bet:IBet)=>{
+          if (!data.length) data.push(bet.type)
+          else if (bet.type !== data[0]) data.push(bet.type)
+      })
+      return data.length > 1
+  }
   return (
     <div>
       <Stack
@@ -30,7 +52,7 @@ const SubMenus = () => {
           <h2>BET BUILDER</h2>
           <InfoIcon color={"primary"} />
         </Stack>
-        <Switch onChange={handleSwitchChange} defaultChecked />
+        <Switch onChange={handleSwitchChange} checked={switchChecked} />
       </Stack>
       <Stack
         sx={{

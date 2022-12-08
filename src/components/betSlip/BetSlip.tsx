@@ -14,6 +14,7 @@ import {toastify} from "../../utils/utils";
 
 const BetSlip = () => {
   const [open, setOpen] = useState(false);
+  const [submit, setSubmit] = useState(false);
   const allBets = useSelector((state: any) => state.app).bets;
   useEffect(() => {
     if (!allBets.length) setOpen(false);
@@ -80,12 +81,6 @@ const BetSlip = () => {
   const toggleDrawer = () => () => {
     setOpen(!open);
   };
-  const checkIfHaveWagerToAll = ():boolean=>{
-   return allBets.some((bet:IBet)=>{
-     if (!bet.wager) return false;
-      return bet.wager > 1
-    })
-  }
   const submitBet = ()=>{
     setOpen(false)
     toastify('Your bet was successful', false)
@@ -124,7 +119,7 @@ const BetSlip = () => {
         <div className={'scroll'}>
           {allBets.length >= 2 && <BetBuilderBox/>}
           {allBets.length &&
-              allBets.map((bet: IBet) => <SingleBox key={bet.bet} bet={bet} />
+              allBets.map((bet: IBet) => <SingleBox submit={setSubmit} key={bet.bet} bet={bet} />
               )}
 
           {allBets.length === 1 && (
@@ -142,7 +137,7 @@ const BetSlip = () => {
               </Stack>
           )}
 
-          {checkIfHaveWagerToAll() ?
+          {submit ?
               <SubmitBox>
                 <Button onClick={()=>submitBet()} sx={{width: '50%'}} variant={'contained'}>Place your bet</Button>
               </SubmitBox>
