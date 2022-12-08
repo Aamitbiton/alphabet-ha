@@ -12,14 +12,16 @@ import {
 import CustomTimeLine from "./CustomTimeLine";
 import ClearIcon from "@mui/icons-material/Clear";
 import "./betSlipStyles.css";
-import { removeBet } from "../../store/slice";
+import {addWagerToBet, removeBet} from "../../store/slice";
 import { useDispatch } from "react-redux";
 
 const SingleBox = (bet: IBetSlipBox) => {
   const dispatch = useDispatch();
-  const [betValue, setBetValue] = useState((0.0).toFixed(2));
+  const [betValue, setBetValue] = useState('0.00');
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setBetValue(event.target.value);
+    const value =event.target.value === '' ? '0.00' : parseFloat(event.target.value).toFixed(2)
+    setBetValue(value);
+    dispatch(addWagerToBet({id:bet.bet.id,wager:Number(value)}))
   };
   const removeBetFromStore = (id: number) => {
     dispatch(removeBet(id));
@@ -43,15 +45,16 @@ const SingleBox = (bet: IBetSlipBox) => {
         <OutlinedInput
           id="outlined-adornment-amount"
           sx={{ width: "125px" }}
-          defaultValue={betValue}
+          placeholder={'0.00'}
           type="number"
+          value={bet.bet?.wager?.toFixed(2)}
           onChange={handleInputChange}
           startAdornment={<InputAdornment position="start">$</InputAdornment>}
           label="Amount"
         />
 
         <FormHelperText id="component-helper-text">
-          payout: ${betValue}
+          payout: ${ betValue }
         </FormHelperText>
       </div>
     </div>

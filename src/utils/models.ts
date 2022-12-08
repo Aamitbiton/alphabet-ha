@@ -14,6 +14,7 @@ export interface IBet {
   bet: string;
   value: number;
   id: number;
+  wager?: number
 }
 export interface IUpdateToStore {
   index: number;

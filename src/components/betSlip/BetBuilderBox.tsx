@@ -36,7 +36,8 @@ const BetBuilderBox = () => {
                         <div onClick={() => removeAllBetsFromStore()}>
                             <ClearIcon fontSize={"large"} />
                         </div>
-                        <Chip variant="outlined" label={"Single"} />
+                        <Chip variant="outlined" label={"BetBuilder"} />
+                        <h2>{allBets.length}picks</h2>
                     </Stack>
                     <Typography>Brazil VS France</Typography>
                     <CustomTimeLine data={createTimeLineData()}/>

@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import SingleBox from "./SingleBox";
 import { IBet } from "../../utils/models";
 import BetBuilderBox from "./BetBuilderBox";
+import {toastify} from "../../utils/utils";
 
 const BetSlip = () => {
   const [open, setOpen] = useState(false);
@@ -56,6 +57,19 @@ const BetSlip = () => {
     alignItems: "center",
     flexDirection: "column",
   });
+  const SubmitBox = styled(Box)({
+    height: 65,
+    width: "80%",
+    position: "absolute",
+    bottom: 5,
+    left: "10%",
+    maxWidth: 400,
+    color: "white",
+    display: "flex",
+    alignItems: "center",
+    flexDirection: "column",
+    justifyItems: "center"
+  });
   const Puller = styled(Box)({
     width: 30,
     height: 6,
@@ -69,6 +83,16 @@ const BetSlip = () => {
   const toggleDrawer = () => () => {
     setOpen(!open);
   };
+  const checkIfHaveWagerToAll = ():boolean=>{
+   return allBets.some((bet:IBet)=>{
+     if (!bet.wager) return false;
+      return bet.wager > 1
+    })
+  }
+  const submitBet = ()=>{
+    setOpen(false)
+    toastify('Your bet was successful', false)
+  }
 
   return (
     <Root>
@@ -119,12 +143,20 @@ const BetSlip = () => {
             </Button>
           </Stack>
         )}
-        <InfoBox>
-          <Typography fontSize={20} fontWeight={"bold"} p={0}>
-            Enter wager amount
-          </Typography>
-          <Typography p={0}>minimum wager is 1.00$</Typography>
-        </InfoBox>
+
+        {checkIfHaveWagerToAll() ?
+            <SubmitBox>
+              <Button onClick={()=>submitBet()} sx={{width: '50%'}} variant={'contained'}>Place your bet</Button>
+            </SubmitBox>
+            :
+            <InfoBox>
+              <Typography fontSize={20} fontWeight={"bold"} p={0}>
+                Enter wager amount
+              </Typography>
+              <Typography p={0}>minimum wager is 1.00$</Typography>
+            </InfoBox>
+
+        }
       </Drawer>
     </Root>
   );
